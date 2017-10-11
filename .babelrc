@@ -1,11 +1,6 @@
 {
-  "presets": ["es2015", "react", "stage-0"],
+  "presets": [["latest", { "modules": false }], "react", "stage-0"],
   "plugins": ["transform-runtime"],
-  "env": {
-    "production": {
-      "presets": ["react-optimize"]
-    }
-  },
   "env": {
     "test": {
       "plugins": [
@@ -15,6 +10,12 @@
           }
         ]
       ]
+    },
+    "server": {
+      "plugins": ["system-import-transformer"]
+    },
+    "production": {
+      "presets": ["react-optimize"]
     }
   }
 }

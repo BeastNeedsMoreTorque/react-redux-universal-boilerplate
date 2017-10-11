@@ -1,15 +1,14 @@
 import { createStore, applyMiddleware, compose } from 'redux'
+import { routerMiddleware } from 'react-router-redux'
 
-// Note: Should not use logger in production. It's just for example
-import logger from '../middleware/logger'
 import rootReducer from '../reducers'
 
-const configureStoreProd = (initialState = {}) => {
-  const finalCreateStore = compose(
-    applyMiddleware(logger)
-  )(createStore)
-
-  return finalCreateStore(rootReducer, initialState)
-}
+const configureStoreProd = (history = {}, preloadedState = {}) => createStore(
+  rootReducer,
+  preloadedState,
+  compose(
+    applyMiddleware(routerMiddleware(history)),
+  )
+)
 
 export default configureStoreProd
